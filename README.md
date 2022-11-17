@@ -1,1 +1,1 @@
-"# EnterallianceQ" 
+# EnterallianceQ
