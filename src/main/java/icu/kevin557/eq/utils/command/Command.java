@@ -110,7 +110,7 @@ public abstract class Command {
                     }
                 }
 
-                ChatUtils.replay(event, messageBuilder.toString());
+                ChatUtils.replay(event, messageBuilder.build());
             }
             else {
                 Command command = this.bot.getCommands().get(arg);
@@ -131,12 +131,12 @@ public abstract class Command {
                     }
                 }
 
-                messageBuilder.append("\n命令用法: ").append(command.description()).append('\n');
+                messageBuilder.append("\n命令用法: ");
                 for (String usage : command.usages()) {
                     messageBuilder.append('\n').append(this.bot.getPrefix()).append(usage);
                 }
 
-                messageBuilder.append("\n命令名称: \n");
+                messageBuilder.append("\n\n命令名称: \n");
                 for (int i = 0; i < nameList.size(); i++) {
                     messageBuilder.append(nameList.get(i));
                     if (i != nameList.size() - 1) {
