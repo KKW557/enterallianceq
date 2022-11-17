@@ -1,4 +1,4 @@
-package icu.kevin557.eq.utils.bot;
+package icu.kevin557.eq.api.bot;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
@@ -7,14 +7,16 @@ import icu.kevin557.eq.Main;
 import icu.kevin557.eq.bots.clashroyale.ClashroyaleBot;
 import icu.kevin557.eq.bots.manager.ManagerBot;
 import icu.kevin557.eq.bots.minecraft.MinecraftBot;
-import icu.kevin557.eq.utils.command.Command;
-import icu.kevin557.eq.utils.command.Logger;
+import icu.kevin557.eq.api.command.Command;
+import icu.kevin557.eq.api.command.Logger;
+import icu.kevin557.eq.utils.I18n;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactory;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
 import net.mamoe.mirai.utils.BotConfiguration;
 import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -61,15 +63,21 @@ public class EqBot {
 
     /**
      * 构造方法
+     * @param eqBot EqBot
      * @param qq QQ号码
      * @param password QQ密码MD5
-     * @param name 名称
      * @param prefix 命令前缀
      * @since A1
      * @return EqBot 实例
      */
-    public EqBot newInstance(long qq, byte[] password, String prefix) {
-        EqBot bot = new EqBot();
+    public EqBot newInstance(EqBot eqBot, long qq, byte[] password, String prefix) {
+        EqBot bot = null;
+        try {
+            bot = eqBot.getClass().newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        assert bot != null;
         bot.configuration = newConfiguration(qq);
         bot.qq = qq;
         bot.password = password;
@@ -84,7 +92,6 @@ public class EqBot {
     public void run() {
         this.init();
         this.login();
-        this.afterLogin();
     }
 
     /**
@@ -97,9 +104,12 @@ public class EqBot {
     /**
      * 登录 mirai
      */
-    protected void login() {
-        this.bot = BotFactory.INSTANCE.newBot(qq, password, configuration);
-        this.bot.login();
+    public void login() {
+        if (this.bot == null || !this.bot.isOnline()) {
+            this.bot = BotFactory.INSTANCE.newBot(qq, password, configuration);
+            this.bot.login();
+            this.afterLogin();
+        }
     }
 
     /**
@@ -119,8 +129,8 @@ public class EqBot {
 
                 /* 不为 null, 直接运行 */
                 if (command != null) {
-                    this.bot.getLogger().info(String.format("[%s(%d)] %s(%d) CMD: %s", event.getGroup().getName(), event.getGroup().getId(), event.getSender().getNick(), event.getSender().getId(), message));
                     command.execute(event, args);
+                    this.bot.getLogger().info(String.format("[%s(%d)] %s(%d) CMD: %s", event.getGroup().getName(), event.getGroup().getId(), event.getSender().getNick(), event.getSender().getId(), message));
                 }
             }
         }));
@@ -142,7 +152,9 @@ public class EqBot {
      * 关闭 mirai 实例
      */
     public void logout() {
-        this.bot.close();
+        if (this.bot.isOnline()) {
+            this.bot.close();
+        }
     }
 
     /**
@@ -177,10 +189,6 @@ public class EqBot {
         return bot;
     }
 
-    public BotConfiguration getConfiguration() {
-        return configuration;
-    }
-
     public long getQq() {
         return qq;
     }
@@ -208,7 +216,7 @@ public class EqBot {
         /**
          * EqBot 实例列表
          */
-        private static final List<EqBot> BOTS = new ArrayList<>();
+        public static final List<EqBot> BOTS = new ArrayList<>();
 
         /**
          * EqBot 注册表
@@ -234,17 +242,13 @@ public class EqBot {
                     String prefix = botObject.getString("prefix");
                     for (EqBot registerBot : REGISTER_BOTS) {
                         if (registerBot.getName().equals(botName)) {
-                            BOTS.add(registerBot.newInstance(qq, password, prefix));
-                            Logger.info(String.format("Add %s bot(%d).", botName, qq));
-                        }
-                        else {
-                            Logger.info(String.format("Unknown bot '%s'", botName));
+                            BOTS.add(registerBot.newInstance(registerBot, qq, password, prefix));
+                            Logger.info(String.format("Loaded %s bot(%d).", botName, qq));
                         }
                     }
                 }
             }
         }
-
 
         /**
          * 运行全部 EqBot
@@ -262,6 +266,21 @@ public class EqBot {
             for (EqBot bot : BOTS) {
                 bot.logout();
             }
+        }
+
+        /**
+         * 获取 EqBot
+         * @param qq QQ号码
+         * @return EqBot
+         */
+        @Nullable
+        public static EqBot getBot(long qq) {
+            for (EqBot bot : BOTS) {
+                if (bot.getQq() == qq) {
+                    return bot;
+                }
+            }
+            return null;
         }
     }
 }

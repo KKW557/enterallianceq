@@ -1,7 +1,6 @@
-package icu.kevin557.eq.utils.command;
+package icu.kevin557.eq.api.command;
 
 import net.mamoe.mirai.utils.MiraiLogger;
-import net.mamoe.mirai.utils.SimpleLogger;
 
 /**
  * @author 557
@@ -12,5 +11,9 @@ public class Logger {
 
     public static void info(String message) {
         LOGGER.info(message);
+    }
+
+    public static void info(String message, Throwable throwable) {
+        LOGGER.info(message, throwable);
     }
 }

@@ -1,0 +1,31 @@
+{
+  "chat.unknownCommand": "未知命令!",
+
+  "command.help.description": "查询可用命令",
+  "command.help.usage1": "帮助 [页码|命令]",
+  "command.help.notFound": "页码不存在!",
+  "command.help.available": "可用命令(%d) 第%d页 共%d页: ",
+  "command.help.unknown": "未知命令!",
+  "command.help.descriptions": "命令介绍: ",
+  "command.help.usages": "命令用法: ",
+  "command.help.names": "命令名称: ",
+  "command.help.split": ", ",
+
+  "command.bots.description": "查询机器人运行状态",
+  "command.bots.usage1": "bot",
+  "command.bots.online": "在线机器人(%d): ",
+  "command.bots.offline": "离线机器人(%d): ",
+  "command.bots.bot": "%s - %d",
+
+  "command.login.description": "登录机器人",
+  "command.login.usage1": "login <机器人QQ>",
+  "command.login.notFound": "机器人(%s)不存在!",
+  "command.login.login": "机器人(%s)已登录",
+  "command.login.notQQ": "'%s' 不是一个有效的QQ号码!",
+
+  "command.logout.description": "登出机器人",
+  "command.logout.usage1": "logout <机器人QQ>",
+  "command.logout.notFound": "机器人(%s)不存在!",
+  "command.logout.logout": "机器人(%s)已登出",
+  "command.logout.notQQ": "'%s' 不是一个有效的QQ号码!"
+}

@@ -1,7 +1,8 @@
-package icu.kevin557.eq.utils.command;
+package icu.kevin557.eq.api.command;
 
-import icu.kevin557.eq.utils.bot.EqBot;
+import icu.kevin557.eq.api.bot.EqBot;
 import icu.kevin557.eq.utils.ChatUtils;
+import icu.kevin557.eq.utils.I18n;
 import icu.kevin557.eq.utils.MathUtils;
 import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.message.data.MessageChainBuilder;
@@ -91,12 +92,12 @@ public abstract class Command {
                 int pages = Math.max((int) Math.ceil(commandList.size() / (double)COMMAND_PER_PAGE), 1);
 
                 if (page > pages || pages < 1) {
-                    ChatUtils.replay(event, "此页码不存在！");
+                    ChatUtils.replay(event, I18n.format("command.help.notFound"));
                     return;
                 }
 
                 MessageChainBuilder messageBuilder = new MessageChainBuilder();
-                messageBuilder.append(String.format("可使用的命令(%d) 第%d页 共%d页:", commandList.size(), page, pages));
+                messageBuilder.append(I18n.format("command.help.available", commandList.size(), page, pages));
 
                 int start = (page - 1) * COMMAND_PER_PAGE;
                 int end = Math.min(page * COMMAND_PER_PAGE, commandList.size());
@@ -116,12 +117,12 @@ public abstract class Command {
                 Command command = this.bot.getCommands().get(arg);
 
                 if (command == null) {
-                    ChatUtils.replay(event, "此命令不存在！");
+                    ChatUtils.replay(event, I18n.format("chat.unknown"));
                     return;
                 }
 
                 MessageChainBuilder messageBuilder = new MessageChainBuilder();
-                messageBuilder.append("命令介绍: ").append(command.description()).append('\n');
+                messageBuilder.append(I18n.format("command.help.descriptions")).append(command.description()).append('\n');
 
                 List<String> nameList = new ArrayList<>();
 
@@ -131,16 +132,16 @@ public abstract class Command {
                     }
                 }
 
-                messageBuilder.append("\n命令用法: ");
+                messageBuilder.append('\n').append(I18n.format("command.help.usages"));
                 for (String usage : command.usages()) {
                     messageBuilder.append('\n').append(this.bot.getPrefix()).append(usage);
                 }
 
-                messageBuilder.append("\n\n命令名称: \n");
+                messageBuilder.append("\n\n").append(I18n.format("command.help.names")).append('\n');
                 for (int i = 0; i < nameList.size(); i++) {
                     messageBuilder.append(nameList.get(i));
                     if (i != nameList.size() - 1) {
-                        messageBuilder.append(", ");
+                        messageBuilder.append(I18n.format("command.help.split"));
                     }
                 }
 
@@ -150,12 +151,12 @@ public abstract class Command {
 
         @Override
         public String description() {
-            return "查询可使用的命令";
+            return I18n.format("command.help.description");
         }
 
         @Override
         public String[] usages() {
-            return new String[] {"帮助 [页码|命令]"};
+            return new String[] {I18n.format("command.help.usage1")};
         }
     }
 }

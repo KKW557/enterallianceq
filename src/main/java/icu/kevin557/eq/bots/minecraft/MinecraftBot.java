@@ -1,6 +1,6 @@
 package icu.kevin557.eq.bots.minecraft;
 
-import icu.kevin557.eq.utils.bot.EqBot;
+import icu.kevin557.eq.api.bot.EqBot;
 
 /**
  * @author 557

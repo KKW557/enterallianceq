@@ -10,7 +10,18 @@ public class MathUtils {
         try {
             Integer.parseInt(s);
             return true;
+        }
+        catch(NumberFormatException e)
+        {
+            return false;
+        }
+    }
 
+    public static boolean isLong(String s)
+    {
+        try {
+            Long.parseLong(s);
+            return true;
         }
         catch(NumberFormatException e)
         {
@@ -24,7 +35,6 @@ public class MathUtils {
         {
             Double.parseDouble(s);
             return true;
-
         }
         catch(NumberFormatException e)
         {

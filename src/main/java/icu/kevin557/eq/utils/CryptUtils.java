@@ -14,7 +14,7 @@ public class CryptUtils {
      * @author 557
      */
     public static byte[] string2Md5(String string) {
-        MessageDigest messageDigest = null;
+        MessageDigest messageDigest;
         try {
             messageDigest = MessageDigest.getInstance("MD5");
         }
