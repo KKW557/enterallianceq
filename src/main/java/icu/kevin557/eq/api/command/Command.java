@@ -26,13 +26,13 @@ public abstract class Command {
     // endregion
 
     /**
-     * 命令所属的 EQBot
+     * 命令所属的 EqBot
      */
     protected final EqBot bot;
 
     /**
      *
-     * @param bot 命令所属的 EQBot
+     * @param bot 命令所属的 EqBot
      * @since A1
      */
     public Command(EqBot bot) {
@@ -67,10 +67,6 @@ public abstract class Command {
          */
         private static final int COMMAND_PER_PAGE = 5;
 
-        /**
-         * @param bot 命令所属的 EQBot
-         * @since A1
-         */
         public Help(EqBot bot) {
             super(bot);
         }

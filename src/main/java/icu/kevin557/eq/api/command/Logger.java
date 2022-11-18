@@ -13,7 +13,15 @@ public class Logger {
         LOGGER.info(message);
     }
 
+    public static void info(String message, Object... params) {
+        LOGGER.info(String.format(message, params));
+    }
+
     public static void info(String message, Throwable throwable) {
         LOGGER.info(message, throwable);
+    }
+
+    public static void info(String message, Throwable throwable, Object... params) {
+        LOGGER.info(String.format(message, params), throwable);
     }
 }

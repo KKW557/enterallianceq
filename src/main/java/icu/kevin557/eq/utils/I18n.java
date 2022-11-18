@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class I18n {
 
-    public static final File LANG_DIR = new File(Main.FILES_DIR, "lang");
+    public static final File DIR = new File(ConfigUtils.FILES_DIR, "lang");
 
     /**
      * 默认语言
@@ -56,7 +56,7 @@ public class I18n {
      * 读取语言配置
      */
     public static void loadLanguage() throws IOException {
-        File file = new File(Main.FILES_DIR, "language.txt");
+        File file = new File(ConfigUtils.FILES_DIR, "language.txt");
 
         if (file.exists()) {
             String language = FileUtils.readFileToString(file, "UTF-8");
@@ -81,7 +81,7 @@ public class I18n {
      * 读取语言属性
      */
     public static void loadLanguageProperties() throws IOException {
-        File file = new File(LANG_DIR, LANGUAGE + ".json");
+        File file = new File(DIR, LANGUAGE + ".json");
 
         if (file.exists()) {
             PROPERTIES = JSON.parseObject(FileUtils.readFileToString(file, "UTF-8"), (Type) HashMap.class);
@@ -97,7 +97,7 @@ public class I18n {
      */
     public static void saveLanguage() throws IOException {
 
-        File file = new File(Main.FILES_DIR, "language.txt");
+        File file = new File(ConfigUtils.FILES_DIR, "language.txt");
 
         FileUtils.write(file, LANGUAGE, "UTF-8");
     }

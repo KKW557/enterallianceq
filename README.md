@@ -1,3 +1,3 @@
 # EnterallianceQ
 
-- A wrapper for [mirai](https://github.com/mamoe/mirai) -core
+A wrapper for mirai-core

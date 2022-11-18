@@ -1,5 +1,6 @@
 {
   "chat.unknownCommand": "未知命令!",
+  "chat.exception": "未知错误! %s",
 
   "command.help.description": "查询可用命令",
   "command.help.usage1": "帮助 [页码|命令]",
@@ -27,5 +28,12 @@
   "command.logout.usage1": "logout <机器人QQ>",
   "command.logout.notFound": "机器人(%s)不存在!",
   "command.logout.logout": "机器人(%s)已登出",
-  "command.logout.notQQ": "'%s' 不是一个有效的QQ号码!"
+  "command.logout.notQQ": "'%s' 不是一个有效的QQ号码!",
+
+  "command.hypixel.description": "查询玩家在Hypixel的数据",
+  "command.hypixel.usage1": "hyp <玩家名称|UUID>",
+  "command.hypixel.apiInvalid": "API已过期, 请联系管理员!",
+
+  "minecraft.wrong": "请输入正确的玩家名称或UUID!",
+  "minecraft.notFound": "玩家不存在!"
 }

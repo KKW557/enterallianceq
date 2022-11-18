@@ -9,7 +9,7 @@ import icu.kevin557.eq.bots.manager.ManagerBot;
 import icu.kevin557.eq.bots.minecraft.MinecraftBot;
 import icu.kevin557.eq.api.command.Command;
 import icu.kevin557.eq.api.command.Logger;
-import icu.kevin557.eq.utils.I18n;
+import icu.kevin557.eq.utils.ConfigUtils;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactory;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
@@ -166,7 +166,7 @@ public class EqBot {
     @NotNull
     private static BotConfiguration newConfiguration(long qq) {
         BotConfiguration configuration = new BotConfiguration();
-        File botDir = new File(Main.QQ_DIR, qq + "");
+        File botDir = new File(ConfigUtils.QQ_DIR, qq + "");
         botDir.mkdir();
         configuration.fileBasedDeviceInfo(new File(botDir, "devices.json").getPath());
         configuration.setCacheDir(new File(botDir, "cache"));
@@ -227,7 +227,7 @@ public class EqBot {
          * 从配置中加载所有 EqBot
          */
         public static void loadBots() throws IOException {
-            File botsFile = new File(Main.FILES_DIR, "bots.json");
+            File botsFile = new File(ConfigUtils.FILES_DIR, "bots.json");
             if (botsFile.exists()) {
                 JSONArray botArray = JSON.parseArray(FileUtils.readFileToString(botsFile, "UTF-8"));
                 for (int i = 0; i < botArray.size(); i++) {
@@ -243,7 +243,7 @@ public class EqBot {
                     for (EqBot registerBot : REGISTER_BOTS) {
                         if (registerBot.getName().equals(botName)) {
                             BOTS.add(registerBot.newInstance(registerBot, qq, password, prefix));
-                            Logger.info(String.format("Loaded %s bot(%d).", botName, qq));
+                            Logger.info("Loaded %s bot(%d).", botName, qq);
                         }
                     }
                 }
