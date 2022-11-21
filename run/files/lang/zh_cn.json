@@ -21,6 +21,7 @@
   "chat.hypixel.channel.ALL": "公共",
   "chat.hypixel.channel.PARTY": "组队",
   "chat.hypixel.channel.GUILD": "公会",
+  "chat.hypixel.channel.PM": "私信",
   "chat.hypixel.join": "加入时间: ",
   "chat.hypixel.status": "状态: ",
   "chat.hypixel.at": "正在游玩: ",
@@ -61,6 +62,10 @@
   "chat.hypixel.mode.LOBBY": "大厅",
   "chat.hypixel.mode.BEDWARS_FOUR_FOUR": "起床战争4s",
   "chat.hypixel.mode.BEDWARS_CASTLE": "起床战争40v40",
+  "chat.hypixel.mode.solo_normal": "单人普通",
+  "chat.hypixel.mode.solo_insane": "单人疯狂",
+  "chat.hypixel.mode.team_normal": "双人人普通",
+  "chat.hypixel.mode.team_insane": "双人人疯狂",
 
   "command.help.description": "查询可用命令",
   "command.help.usage1": "帮助 [页码|命令]",

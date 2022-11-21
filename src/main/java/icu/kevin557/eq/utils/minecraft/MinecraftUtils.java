@@ -5,7 +5,6 @@ import com.alibaba.fastjson2.JSONObject;
 import icu.kevin557.eq.api.command.Logger;
 import icu.kevin557.eq.utils.FontUtils;
 import icu.kevin557.eq.utils.HttpUtils;
-import icu.kevin557.eq.utils.ImageUtils;
 import net.mamoe.mirai.internal.deps.io.ktor.util.CaseInsensitiveMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,7 +13,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
@@ -37,7 +35,7 @@ public class MinecraftUtils {
     public static final Map<String, String> NAME_CACHE = new CaseInsensitiveMap<>();
 
     public static final String NAMEMC_URL = "https://namemc.com/profile/%s";
-    public static final String SKINMODEL_URL = "https://s.namemc.com/3d/skin/body.png?width=%d&height=%d&model=%s&id=%s&cape=%s";
+    public static final String SKINMODEL_URL = "https://s.namemc.com/3d/skin/body.png?width=%s&height=%s&model=%s&id=%s&cape=%s";
 
     /**
      * 获取玩家名称
@@ -135,15 +133,17 @@ public class MinecraftUtils {
         }
     }
 
+
     /**
      * 添加转换为富文本
      * @param str 原文本
      * @param font 首选字体
      * @param fore 是否为前景色
+     * @param alpha 透明度
      * @return 富文本
      */
     @NotNull
-    public static AttributedString colorString(@NotNull String str, Font font, boolean fore) {
+    public static AttributedString colorString(@NotNull String str, Font font, boolean fore, int alpha) {
         String formatString = str.replaceAll("\u00a7.?", "");
         AttributedString attributedString = FontUtils.fallbackFont(formatString, font);
 
@@ -156,7 +156,7 @@ public class MinecraftUtils {
 
             if (str.charAt(end) == '\u00a7' && end != strLength - 1) {
                 if (color != null && start != end - codeCount) {
-                    attributedString.addAttribute(TextAttribute.FOREGROUND, fore ? color.getForeColor() : color.getBackColor(), start, end - codeCount);
+                    attributedString.addAttribute(TextAttribute.FOREGROUND, fore ? color.getForeColor(alpha) : color.getBackColor(alpha), start, end - codeCount);
                     start = end - codeCount;
                 }
                 color = Color.getColorByCode(str.charAt(end + 1));
@@ -167,10 +167,22 @@ public class MinecraftUtils {
         }
 
         if (color != null) {
-            attributedString.addAttribute(TextAttribute.FOREGROUND, fore ? color.getForeColor() : color.getBackColor(), start, formatString.length());
+            attributedString.addAttribute(TextAttribute.FOREGROUND, fore ? color.getForeColor(alpha) : color.getBackColor(alpha), start, formatString.length());
         }
 
         return attributedString;
+    }
+
+    /**
+     * 添加转换为富文本
+     * @param str 原文本
+     * @param font 首选字体
+     * @param fore 是否为前景色
+     * @return 富文本
+     */
+    @NotNull
+    public static AttributedString colorString(@NotNull String str, Font font, boolean fore) {
+        return colorString(str, font, fore, 255);
     }
 
     /**
@@ -188,10 +200,24 @@ public class MinecraftUtils {
             String model = canvas.attr("data-model");
             String id = canvas.attr("data-id");
             String cape = canvas.attr("data-cape");
-            return ImageIO.read(HttpUtils.executeStream(String.format(SKINMODEL_URL, width, height, model, id, cape)));
+            return ImageIO.read(HttpUtils.executeStream(skinModelUrl(width, height, model, id, cape, null, null, null)));
         } catch (IOException | NullPointerException e) {
             return null;
         }
+    }
+
+    private static String skinModelUrl(int width, int height, String model, String id, String cape, String time, String theta, String phi) {
+        String url = String.format(SKINMODEL_URL, width, height, model, id, cape);
+        if (time != null) {
+            url += ("&" + time);
+        }
+        if (theta != null) {
+            url += ("&" + theta);
+        }
+        if (phi != null) {
+            url += ("&" + phi);
+        }
+        return url;
     }
 
     /**
@@ -306,6 +332,14 @@ public class MinecraftUtils {
 
         public java.awt.Color getBackColor() {
             return backColor;
+        }
+
+        public java.awt.Color getForeColor(int alpha) {
+            return new java.awt.Color(foreColor.getRed(), foreColor.getGreen(), foreColor.getBlue(), alpha);
+        }
+
+        public java.awt.Color getBackColor(int alpha) {
+            return new java.awt.Color(backColor.getRed(), backColor.getGreen(), backColor.getBlue(), alpha);
         }
 
         public char getCode() {

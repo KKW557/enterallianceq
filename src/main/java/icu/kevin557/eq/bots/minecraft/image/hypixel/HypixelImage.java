@@ -78,11 +78,13 @@ public class HypixelImage extends AbstractImage {
 
         BufferedImage playerModel = MinecraftUtils.playerModel(id, 128, 256);
         if (playerModel != null) {
-            ImageUtils.drawImage(image, playerModel, 116, 86);
+            ImageUtils.drawImage(image, playerModel, 116, 90);
         }
 
+        ImageUtils.drawString(image, MinecraftUtils.colorString(MinecraftUtils.Color.GRAY + "Network Stats", FONT16, false, 128), 16, 22);
+
         if (ranksGifted == null) {
-            this.drawCenterStringWithShadow(name, FONT18, 180, 70);
+            this.drawCenterStringWithShadow(name, FONT18, 180, 76);
         }
         else {
             this.drawCenterStringWithShadow(name, FONT18, 180, 62);
@@ -108,10 +110,10 @@ public class HypixelImage extends AbstractImage {
                 String session = "";
 
                 if (gameType != null) {
-                    session += I18n.format("chat.hypixel.gameType." + gameType);
+                    session += I18n.formatWithMode("chat.hypixel.gameType", gameType);
                 }
                 if (mode != null) {
-                    session += I18n.format("chat.hypixel.mode." + mode);
+                    session += I18n.formatWithMode("chat.hypixel.mode", mode);
                 }
                 if (map != null) {
                     session += " " + map;
@@ -121,20 +123,20 @@ public class HypixelImage extends AbstractImage {
             }
             else {
                 this.drawStringWithShadow(I18n.format("chat.hypixel.status") + MinecraftUtils.Color.RED + I18n.format("chat.hypixel.offline") + (lastLogout == null ? "" : ("  " + MinecraftUtils.Color.DARK_GRAY + lastLogout)), FONT18, 409, 390);
-                this.drawStringWithShadow(I18n.format("chat.hypixel.recent") + MinecraftUtils.Color.GRAY + I18n.format("chat.hypixel.gameType." + recent), FONT18, 409, 424);
+                this.drawStringWithShadow(I18n.format("chat.hypixel.recent") + MinecraftUtils.Color.GRAY + I18n.formatWithMode("chat.hypixel.gameType", recent), FONT18, 409, 424);
             }
         }
         return image;
     }
 
-    private void drawCenterStringWithShadow(String str, Font FONT18, float x, float y) {
-        ImageUtils.drawCenterString(image, MinecraftUtils.colorString(str, FONT18, false), x + 1, y + 1);
-        ImageUtils.drawCenterString(image, MinecraftUtils.colorString(str, FONT18, true), x - 1, y - 1);
+    private void drawCenterStringWithShadow(String str, Font font, float x, float y) {
+        ImageUtils.drawCenterString(image, MinecraftUtils.colorString(str, font, false), x + 1, y + 1);
+        ImageUtils.drawCenterString(image, MinecraftUtils.colorString(str, font, true), x - 1, y - 1);
     }
 
-    private void drawStringWithShadow(String str, Font FONT18, float x, float y) {
-        ImageUtils.drawString(image, MinecraftUtils.colorString(str, FONT18, false), x + 1, y + 1);
-        ImageUtils.drawString(image, MinecraftUtils.colorString(str, FONT18, true), x - 1, y - 1);
+    private void drawStringWithShadow(String str, Font font, float x, float y) {
+        ImageUtils.drawString(image, MinecraftUtils.colorString(str, font, false), x + 1, y + 1);
+        ImageUtils.drawString(image, MinecraftUtils.colorString(str, font, true), x - 1, y - 1);
     }
 
     public static void load() throws IOException {

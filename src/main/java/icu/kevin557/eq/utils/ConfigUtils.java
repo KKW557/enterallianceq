@@ -26,6 +26,16 @@ public class ConfigUtils {
      */
     public static final File QQ_DIR = new File(FILES_DIR, "qq");
 
+    /**
+     * 保存字体文件位置
+     */
+    public static final File FONT_DIR = new File(FILES_DIR, "fonts");
+
+    /**
+     * 保存语言文件位置
+     */
+    public static final File LANGUAGE_DIR = new File(FILES_DIR, "lang");
+
     //endregion
 
     // region keys

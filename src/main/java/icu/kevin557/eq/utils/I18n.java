@@ -52,6 +52,16 @@ public class I18n {
     }
 
     /**
+     * 格式化
+     * @param translateKey 翻译键
+     * @param mode 模式
+     * @return 格式化后的字符串
+     */
+    public static String formatWithMode(String translateKey, String mode) {
+        return PROPERTIES.getOrDefault(translateKey + "." + mode, mode);
+    }
+
+    /**
      * 读取语言配置
      */
     public static void loadLanguage() throws IOException {

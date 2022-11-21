@@ -70,7 +70,7 @@ public class EqBot {
      * @since A1
      * @return EqBot 实例
      */
-    public EqBot newInstance(EqBot eqBot, long qq, byte[] password, String prefix) {
+    public EqBot newInstance(@NotNull EqBot eqBot, long qq, byte[] password, String prefix) {
         EqBot bot = null;
         try {
             bot = eqBot.getClass().newInstance();
@@ -239,10 +239,9 @@ public class EqBot {
                     for (int j = 0; j < passwordArray.size(); j++) {
                         password[j] = passwordArray.getByte(j);
                     }
-                    String prefix = botObject.getString("prefix");
                     for (EqBot registerBot : REGISTER_BOTS) {
                         if (registerBot.getName().equals(botName)) {
-                            BOTS.add(registerBot.newInstance(registerBot, qq, password, prefix));
+                            BOTS.add(registerBot.newInstance(registerBot, qq, password, botObject.getString("prefix")));
                             Logger.info("Loaded %s bot(%d).", botName, qq);
                         }
                     }

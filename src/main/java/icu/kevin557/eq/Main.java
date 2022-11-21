@@ -21,18 +21,8 @@ public class Main {
      */
     private static void init() {
 
-        /* 钩子 */
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            /* 登出全部机器人 */
-            EqBot.Manager.logoutBots();
-
-            /* 保存配置 */
-            ConfigUtils.save();
-        }));
-
         /* 加载配置 */
         ConfigUtils.load();
-
 
         /* 加载机器人 */
         try {

@@ -36,8 +36,8 @@ public class HypixelCommand extends Command {
                             if (player != null) {
 
                                 String rank = null;
-                                if (player.get("rank") == null && !"NONE".equals(player.getString("rank"))) {
-                                    rank = player.getString("rank");
+                                if (player.get("rank") != null && !"NONE".equals(player.getString("rank"))) {
+                                    rank = HypixelUtils.Rank.getRank(player.getString("rank"));
                                 }
                                 if (player.get("prefix") != null && !"NONE".equals(player.getString("prefix"))) {
                                     rank = player.getString("prefix");
@@ -69,7 +69,7 @@ public class HypixelCommand extends Command {
                                     }
                                 }
 
-                                String name = "";
+                                String name;
                                 if (rank == null) {
                                     name = MinecraftUtils.Color.GRAY.toString();
                                 }
@@ -85,7 +85,7 @@ public class HypixelCommand extends Command {
 
                                 String level = FormatUtils.formatNumber(HypixelUtils.formatNetworkLevel(player.getDoubleValue("networkExp")));
 
-                                String language = I18n.format("chat.hypixel.language." + (player.get("userLanguage") == null ? "ENGLISH" : player.getString("userLanguage")));
+                                String language = I18n.formatWithMode("chat.hypixel.language", (player.get("userLanguage") == null ? "ENGLISH" : player.getString("userLanguage")));
 
                                 String achievementPoints = FormatUtils.formatNumber(player.getIntValue("achievementPoints"));
 
@@ -95,7 +95,7 @@ public class HypixelCommand extends Command {
                                     friend = FormatUtils.formatNumber(friendJson.getJSONArray("records").size());
                                 }
 
-                                String channel = I18n.format("chat.hypixel.channel." + (player.get("channel") == null ? "ALL" : player.getString("channel")));
+                                String channel = I18n.formatWithMode("chat.hypixel.channel", (player.get("channel") == null ? "ALL" : player.getString("channel")));
 
                                 String firstLogin = DateUtils.formatChina(player.getLongValue("firstLogin"));
 
