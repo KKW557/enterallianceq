@@ -46,7 +46,7 @@ public class ChatUtils {
     public static void replay(@NotNull MessageEvent event, @NotNull BufferedImage image, String fileName) {
         try {
             File file = new File(event.getBot().getConfiguration().getCacheDir(), fileName + ".png");
-            ImageIO.write(image, "png", file);
+            ImageIO.write(image, ImageUtils.PNG, file);
             event.getSubject().sendMessage(new MessageChainBuilder().append(new QuoteReply(event.getMessage())).append(Contact.uploadImage(event.getSubject(), file)).build());
         } catch (IOException e) {
             event.getBot().getLogger().info("Reply image was failed!");

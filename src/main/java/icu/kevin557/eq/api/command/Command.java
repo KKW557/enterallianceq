@@ -118,7 +118,7 @@ public abstract class Command {
                 }
 
                 MessageChainBuilder messageBuilder = new MessageChainBuilder();
-                messageBuilder.append(I18n.format("command.help.descriptions")).append(command.description()).append('\n');
+                messageBuilder.append(I18n.format("command.help.descriptions")).append('\n').append(command.description()).append('\n');
 
                 List<String> nameList = new ArrayList<>();
 

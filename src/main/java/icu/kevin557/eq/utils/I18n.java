@@ -1,7 +1,6 @@
 package icu.kevin557.eq.utils;
 
 import com.alibaba.fastjson2.JSON;
-import icu.kevin557.eq.Main;
 import icu.kevin557.eq.api.command.Logger;
 import org.apache.commons.io.FileUtils;
 

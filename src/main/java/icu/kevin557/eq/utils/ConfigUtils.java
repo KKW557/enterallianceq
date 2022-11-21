@@ -2,6 +2,8 @@ package icu.kevin557.eq.utils;
 
 import icu.kevin557.eq.api.bot.EqBot;
 import icu.kevin557.eq.api.command.Logger;
+import icu.kevin557.eq.api.image.AbstractImage;
+import icu.kevin557.eq.bots.minecraft.image.hypixel.HypixelImage;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -51,6 +53,15 @@ public class ConfigUtils {
         if (!QQ_DIR.exists()) {
             QQ_DIR.mkdir();
         }
+        if (!AbstractImage.DIR.exists()) {
+            AbstractImage.DIR.mkdir();
+        }
+        if (!HypixelImage.DIR.exists()) {
+            HypixelImage.DIR.mkdir();
+        }
+        if (!HypixelImage.MAIN_DIR.exists()) {
+            HypixelImage.MAIN_DIR.mkdir();
+        }
 
         //endregion
 
@@ -75,11 +86,11 @@ public class ConfigUtils {
             Logger.info("Fail to load hypixel key!", e);
         }
 
-        /* 加载机器人 */
         try {
-            EqBot.Manager.loadBots();
+            HypixelImage.load();
+            Logger.info("Loaded hypixel images.");
         } catch (IOException e) {
-            Logger.info("Fail to load bots!", e);
+            Logger.info("Fail to load hypixel images!", e);
         }
 
         // endregion

@@ -2,29 +2,28 @@ package icu.kevin557.eq.bots.manager.command;
 
 import icu.kevin557.eq.api.bot.EqBot;
 import icu.kevin557.eq.api.command.Command;
-import icu.kevin557.eq.bots.minecraft.image.hypixel.HypixelImage;
 import icu.kevin557.eq.utils.ChatUtils;
-
+import icu.kevin557.eq.utils.ConfigUtils;
 import net.mamoe.mirai.event.events.MessageEvent;
 
 /**
  * @author 557
  */
-public class TestCommand extends Command {
+public class ReloadCommand extends Command {
 
-    public TestCommand(EqBot bot) {
+    public ReloadCommand(EqBot bot) {
         super(bot);
     }
 
     @Override
     public void execute(MessageEvent event, String[] args) {
-//        HypixelImage image = new HypixelImage();
-//        ChatUtils.replay(event, image.get(), "test");
+        ConfigUtils.load();
+        ChatUtils.replay(event, "Reloaded configs.");
     }
 
     @Override
     public String description() {
-        return "test";
+        return null;
     }
 
     @Override

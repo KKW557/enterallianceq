@@ -1,10 +1,7 @@
 package icu.kevin557.eq.bots.manager;
 
 import icu.kevin557.eq.api.bot.EqBot;
-import icu.kevin557.eq.bots.manager.command.BotsCommand;
-import icu.kevin557.eq.bots.manager.command.LoginCommand;
-import icu.kevin557.eq.bots.manager.command.LogoutCommand;
-import icu.kevin557.eq.bots.manager.command.TestCommand;
+import icu.kevin557.eq.bots.manager.command.*;
 
 /**
  * @author 557
@@ -19,6 +16,7 @@ public class ManagerBot extends EqBot {
         this.registerCommand(new LoginCommand(this), "login");
         this.registerCommand(new LogoutCommand(this), "logout");
         this.registerCommand(new TestCommand(this), "test");
+        this.registerCommand(new ReloadCommand(this), "reload");
     }
 
     @Override

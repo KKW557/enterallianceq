@@ -1,6 +1,7 @@
 package icu.kevin557.eq.bots.minecraft;
 
 import icu.kevin557.eq.api.bot.EqBot;
+import icu.kevin557.eq.bots.minecraft.command.hypxiel.BedwarsCommand;
 import icu.kevin557.eq.bots.minecraft.command.hypxiel.HypixelCommand;
 
 /**
@@ -13,6 +14,7 @@ public class MinecraftBot extends EqBot {
         super.init();
 
         this.registerCommand(new HypixelCommand(this), "hypixel", "hyp");
+        this.registerCommand(new BedwarsCommand(this), "bedwars", "bw");
     }
 
     @Override
