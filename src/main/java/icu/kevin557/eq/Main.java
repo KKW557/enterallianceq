@@ -1,34 +1,27 @@
 package icu.kevin557.eq;
 
-import icu.kevin557.eq.api.bot.EqBot;
-import icu.kevin557.eq.api.command.Logger;
 import icu.kevin557.eq.utils.ConfigUtils;
-
-import java.io.IOException;
+import icu.kevin557.eq.utils.I18n;
 
 /**
  * @author 557
  */
 public class Main {
-    
+
     public static void main(String[] args) {
-        init();
-        EqBot.Manager.runBots();
-    }
 
-    /**
-     * 初始化
-     */
-    private static void init() {
+        ConfigUtils.mkdirs();
 
-        /* 加载配置 */
-        ConfigUtils.load();
+        I18n.loadLanguages();
 
-        /* 加载机器人 */
-        try {
-            EqBot.Manager.loadBots();
-        } catch (IOException e) {
-            Logger.info("Fail to load bots!", e);
-        }
+        EqManager.loadBots();
+
+        EqManager.loadBotConfigs();
+
+        EqManager.loginBots();
+
+        EqManager.subscribeBotEvents();
+
+        EqManager.registerBotCommands();
     }
 }

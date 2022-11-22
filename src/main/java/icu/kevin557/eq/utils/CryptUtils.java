@@ -7,12 +7,6 @@ import java.security.MessageDigest;
  */
 public class CryptUtils {
 
-    /**
-     * 将String转换为字节MD5
-     * @param string 字符串
-     * @return MD5
-     * @author 557
-     */
     public static byte[] string2Md5(String string) {
         MessageDigest messageDigest;
         try {

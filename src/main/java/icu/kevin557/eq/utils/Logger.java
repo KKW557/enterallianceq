@@ -1,4 +1,4 @@
-package icu.kevin557.eq.api.command;
+package icu.kevin557.eq.utils;
 
 import net.mamoe.mirai.utils.MiraiLogger;
 
@@ -13,15 +13,7 @@ public class Logger {
         LOGGER.info(message);
     }
 
-    public static void info(String message, Object... params) {
-        LOGGER.info(String.format(message, params));
-    }
-
     public static void info(String message, Throwable throwable) {
         LOGGER.info(message, throwable);
-    }
-
-    public static void info(String message, Throwable throwable, Object... params) {
-        LOGGER.info(String.format(message, params), throwable);
     }
 }

@@ -1,0 +1,10 @@
+{
+  "commands.help.description" : "查询可用命令",
+  "commands.help.usage" : "帮助 [页码|命令]",
+  "commands.help.chat.invalidPage" : "页码不存在!",
+  "commands.help.chat.unknownCommand" : "未知命令!",
+  "commands.help.chat.availableCommands" : "可用命令(%d) 第%d页 共%d页: ",
+  "commands.help.chat.commandDescription" : "命令介绍: ",
+  "commands.help.chat.commandUsage" : "命令用法: ",
+  "commands.help.chat.commandAlias" : "命令名称: "
+}

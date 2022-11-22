@@ -1,6 +1,4 @@
 .gradle
 build
-run/files/fonts
-run/files/qq
-run/files/hypixel.txt
-run/files/bots.json
+run/qq
+run/bots.json

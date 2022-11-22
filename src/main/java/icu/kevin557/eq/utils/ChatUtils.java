@@ -19,37 +19,21 @@ import java.io.IOException;
  */
 public class ChatUtils {
 
-    /**
-     * 回复一条消息
-     * @param event 消息事件
-     * @param message 要发送的消息
-     */
     public static void replay(@NotNull MessageEvent event, String message) {
         event.getSubject().sendMessage(new MessageChainBuilder().append(new QuoteReply(event.getMessage())).append(message).build());
     }
 
-    /**
-     * 回复一条消息
-     * @param event 消息事件
-     * @param message 要发送的消息
-     */
     public static void replay(@NotNull MessageEvent event, MessageChain message) {
         event.getSubject().sendMessage(new MessageChainBuilder().append(new QuoteReply(event.getMessage())).append(message).build());
     }
 
-    /**
-     * 回复一张图片
-     * @param event 消息事件
-     * @param image 图片
-     * @param fileName 保存的文件名称
-     */
     public static void replay(@NotNull MessageEvent event, @NotNull BufferedImage image, String fileName) {
         try {
             File file = new File(event.getBot().getConfiguration().getCacheDir(), fileName + ".png");
-            ImageIO.write(image, ImageUtils.PNG, file);
+            ImageIO.write(image, "png", file);
             event.getSubject().sendMessage(new MessageChainBuilder().append(new QuoteReply(event.getMessage())).append(Contact.uploadImage(event.getSubject(), file)).build());
         } catch (IOException e) {
-            event.getBot().getLogger().info("Reply image was failed!");
+            event.getBot().getLogger().info("Failed to reply a image.");
         }
     }
 }
