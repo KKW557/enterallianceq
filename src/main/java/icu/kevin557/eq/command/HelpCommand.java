@@ -2,7 +2,7 @@ package icu.kevin557.eq.command;
 
 import icu.kevin557.eq.EnteralianceQ;
 import icu.kevin557.eq.utils.ChatUtils;
-import icu.kevin557.eq.utils.MathUtils;
+import icu.kevin557.eq.utils.math.MathUtils;
 import net.mamoe.mirai.contact.User;
 import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.message.data.MessageChainBuilder;
@@ -40,12 +40,12 @@ public class HelpCommand extends Command {
             int pages = Math.max((int) Math.ceil(commandList.size() / (double)COMMAND_PER_PAGE), 1);
 
             if (page > pages || pages < 1) {
-                ChatUtils.replay(event, format("commands.help.chat.invalidPage"));
+                ChatUtils.replay(event, format("chat.invalidPage"));
                 return;
             }
 
             MessageChainBuilder messageBuilder = new MessageChainBuilder();
-            messageBuilder.append(format("commands.help.chat.availableCommands", commandList.size(), page, pages));
+            messageBuilder.append(format("chat.availableCommands", commandList.size(), page, pages));
 
             int start = (page - 1) * COMMAND_PER_PAGE;
             int end = Math.min(page * COMMAND_PER_PAGE, commandList.size());
@@ -54,7 +54,7 @@ public class HelpCommand extends Command {
                 Command command = commandList.get(i);
                 messageBuilder.append("\n\n").append(command.description()).append(": ");
 
-                messageBuilder.append('\n').append(this.bot.prefix).append(command.usage());
+                messageBuilder.append('\n').append(String.format(command.usage(), this.bot.prefix));
 
             }
 
@@ -64,12 +64,12 @@ public class HelpCommand extends Command {
             Command command = this.bot.getCommands().get(arg);
 
             if (command == null) {
-                ChatUtils.replay(event, format("commands.help.chat.unknownCommand"));
+                ChatUtils.replay(event, format("chat.unknownCommand"));
                 return;
             }
 
             MessageChainBuilder messageBuilder = new MessageChainBuilder();
-            messageBuilder.append(format("commands.help.chat.commandDescription")).append('\n').append(command.description()).append('\n');
+            messageBuilder.append(format("chat.commandDescription")).append('\n').append(command.description()).append('\n');
 
             List<String> nameList = new ArrayList<>();
 
@@ -79,10 +79,10 @@ public class HelpCommand extends Command {
                 }
             }
 
-            messageBuilder.append('\n').append(format("commands.help.chat.commandUsage"));
-            messageBuilder.append('\n').append(this.bot.prefix).append(command.usage());
+            messageBuilder.append('\n').append(format("chat.commandUsage"));
+            messageBuilder.append('\n').append(String.format(command.usage(), this.bot.prefix));
 
-            messageBuilder.append("\n\n").append(format("commands.help.chat.commandAlias")).append('\n');
+            messageBuilder.append("\n\n").append(format("chat.commandAlias")).append('\n');
             for (int i = 0; i < nameList.size(); i++) {
                 messageBuilder.append(nameList.get(i));
                 if (i != nameList.size() - 1) {

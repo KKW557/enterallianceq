@@ -1,5 +1,6 @@
 package icu.kevin557.eq.utils;
 
+import icu.kevin557.eq.utils.resouces.ConfigUtils;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.message.data.Image;
@@ -29,7 +30,7 @@ public class ChatUtils {
 
     public static void replay(@NotNull MessageEvent event, @NotNull BufferedImage image, String fileName) {
         try {
-            File file = new File(event.getBot().getConfiguration().getCacheDir(), fileName + ".png");
+            File file = new File(ConfigUtils.DIR_IMAGE_CACHE, fileName + ".png");
             ImageIO.write(image, "png", file);
             event.getSubject().sendMessage(new MessageChainBuilder().append(new QuoteReply(event.getMessage())).append(Contact.uploadImage(event.getSubject(), file)).build());
         } catch (IOException e) {

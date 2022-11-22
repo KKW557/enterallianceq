@@ -4,6 +4,7 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import icu.kevin557.eq.bot.manager.ManagerBot;
+import icu.kevin557.eq.bot.minecraft.MinecraftBot;
 import icu.kevin557.eq.utils.Logger;
 import org.apache.commons.io.FileUtils;
 
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class EqManager {
 
-    private static final EnteralianceQ[] REGISTER_BOTS = {new ManagerBot()};
+    private static final EnteralianceQ[] REGISTER_BOTS = {new ManagerBot(), new MinecraftBot()};
     public static final List<EnteralianceQ> BOTS = new ArrayList<>();
 
     public static void loadBots() {

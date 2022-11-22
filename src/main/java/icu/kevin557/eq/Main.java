@@ -1,7 +1,8 @@
 package icu.kevin557.eq;
 
-import icu.kevin557.eq.utils.ConfigUtils;
-import icu.kevin557.eq.utils.I18n;
+import icu.kevin557.eq.utils.minecraft.HypixelUtils;
+import icu.kevin557.eq.utils.resouces.ConfigUtils;
+import icu.kevin557.eq.utils.resouces.I18n;
 
 /**
  * @author 557
@@ -13,6 +14,8 @@ public class Main {
         ConfigUtils.mkdirs();
 
         I18n.loadLanguages();
+
+        HypixelUtils.loadImages();
 
         EqManager.loadBots();
 

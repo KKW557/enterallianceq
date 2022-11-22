@@ -4,8 +4,9 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import icu.kevin557.eq.command.Command;
 import icu.kevin557.eq.command.HelpCommand;
-import icu.kevin557.eq.utils.ConfigUtils;
-import icu.kevin557.eq.utils.I18n;
+import icu.kevin557.eq.utils.ChatUtils;
+import icu.kevin557.eq.utils.resouces.ConfigUtils;
+import icu.kevin557.eq.utils.resouces.I18n;
 import icu.kevin557.eq.utils.Logger;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactory;
@@ -53,7 +54,7 @@ public abstract class EnteralianceQ {
                 }
 
                 if (jsonObject.get("language") != null) {
-                    this.prefix = jsonObject.getString("language");
+                    this.language = jsonObject.getString("language");
                 }
 
             } catch (IOException e) {
@@ -90,9 +91,14 @@ public abstract class EnteralianceQ {
 
                 Command command = commands.get(args[0]);
 
-                if (command != null && command.runnable(event.getSender(), args.length)) {
-                    command.execute(event, args);
-                    this.bot.getLogger().info(String.format("[%s(%d)] %s(%d) CMD: %s", event.getGroup().getName(), event.getGroup().getId(), event.getSender().getNick(), event.getSender().getId(), message));
+                if (command != null) {
+                    if (command.runnable(event.getSender(), args.length)) {
+                        command.execute(event, args);
+                        this.bot.getLogger().info(String.format("[%s(%d)] %s(%d) CMD: %s", event.getGroup().getName(), event.getGroup().getId(), event.getSender().getNick(), event.getSender().getId(), message));
+                    }
+                    else {
+                        ChatUtils.replay(event, format("chat.exception.illegalArg", this.prefix + "help " + command.getName()));
+                    }
                 }
             }
         }));

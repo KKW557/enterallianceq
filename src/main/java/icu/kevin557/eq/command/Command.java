@@ -33,14 +33,18 @@ public abstract class Command {
     public abstract boolean runnable(User user, int length);
 
     public String description() {
-        return this.format("commands." + name + ".description");
+        return this.format("description");
     };
 
     public String usage() {
-        return this.format("commands." + name + ".usage");
+        return this.format("usage");
     };
 
     public String format(String translateKey, Object... params) {
-        return this.bot.format(translateKey, params);
+        return this.bot.format("commands." + name + "." + translateKey, params);
+    }
+
+    public String getName() {
+        return name;
     }
 }
