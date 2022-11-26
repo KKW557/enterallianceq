@@ -1,6 +1,7 @@
 package icu.kevin557.eq;
 
-import icu.kevin557.eq.utils.minecraft.HypixelUtils;
+import icu.kevin557.eq.utils.games.clashroyale.ClashroyaleUtils;
+import icu.kevin557.eq.utils.games.minecraft.hypixel.HypixelUtils;
 import icu.kevin557.eq.utils.resouces.ConfigUtils;
 import icu.kevin557.eq.utils.resouces.I18n;
 
@@ -16,6 +17,8 @@ public class Main {
         I18n.loadLanguages();
 
         HypixelUtils.loadImages();
+
+        ClashroyaleUtils.loadImages();
 
         EqManager.loadBots();
 

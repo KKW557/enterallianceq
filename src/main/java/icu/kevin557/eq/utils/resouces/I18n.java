@@ -41,6 +41,10 @@ public class I18n {
         }
     }
 
+    public static String formatByMode(String language, String translateKey, String mode) {
+        return PROPERTIES_MAP.getOrDefault(language, defaultProperties()).getOrDefault(translateKey + "." + mode, mode);
+    }
+
     private static Map<String, String> defaultProperties() {
         return PROPERTIES_MAP.get("zh_cn");
     }

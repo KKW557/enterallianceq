@@ -8,6 +8,7 @@ import java.security.MessageDigest;
 public class CryptUtils {
 
     public static byte[] string2Md5(String string) {
+
         MessageDigest messageDigest;
         try {
             messageDigest = MessageDigest.getInstance("MD5");

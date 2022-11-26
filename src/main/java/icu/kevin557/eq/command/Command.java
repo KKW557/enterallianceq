@@ -1,6 +1,6 @@
 package icu.kevin557.eq.command;
 
-import icu.kevin557.eq.EnteralianceQ;
+import icu.kevin557.eq.EnterallianceQ;
 import net.mamoe.mirai.contact.User;
 import net.mamoe.mirai.event.events.MessageEvent;
 
@@ -9,10 +9,10 @@ import net.mamoe.mirai.event.events.MessageEvent;
  */
 public abstract class Command {
 
-    protected final EnteralianceQ bot;
+    protected final EnterallianceQ bot;
     protected final String name;
 
-    public Command(EnteralianceQ bot, String name) {
+    public Command(EnterallianceQ bot, String name) {
         this.bot = bot;
         this.name = name;
     }

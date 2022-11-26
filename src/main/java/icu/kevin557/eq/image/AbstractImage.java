@@ -1,6 +1,6 @@
 package icu.kevin557.eq.image;
 
-import icu.kevin557.eq.EnteralianceQ;
+import icu.kevin557.eq.EnterallianceQ;
 
 import java.awt.image.BufferedImage;
 
@@ -11,13 +11,13 @@ public abstract class AbstractImage {
 
     protected final BufferedImage image;
 
-    protected final EnteralianceQ bot;
+    protected final EnterallianceQ bot;
 
-    public AbstractImage(EnteralianceQ bot, int width, int height) {
+    public AbstractImage(EnterallianceQ bot, int width, int height) {
         this(bot, new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB));
     }
 
-    public AbstractImage(EnteralianceQ bot, BufferedImage image) {
+    public AbstractImage(EnterallianceQ bot, BufferedImage image) {
         this.bot = bot;
         this.image = image;
     }

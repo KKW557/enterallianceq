@@ -1,6 +1,6 @@
 package icu.kevin557.eq.command;
 
-import icu.kevin557.eq.EnteralianceQ;
+import icu.kevin557.eq.EnterallianceQ;
 import icu.kevin557.eq.utils.ChatUtils;
 import icu.kevin557.eq.utils.math.MathUtils;
 import net.mamoe.mirai.contact.User;
@@ -19,7 +19,7 @@ public class HelpCommand extends Command {
 
     private static final int COMMAND_PER_PAGE = 5;
 
-    public HelpCommand(EnteralianceQ bot) {
+    public HelpCommand(EnterallianceQ bot) {
         super(bot, "help");
     }
 

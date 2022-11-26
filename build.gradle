@@ -29,6 +29,11 @@ jar {
     }
 }
 
+task copyJars(type: Copy) {
+    from configurations.runtimeClasspath
+    into 'build/libs'
+}
+
 dependencies {
     implementation group: 'net.mamoe', name: 'mirai-core', version: '2.13.0-RC2'
     implementation group: 'net.mamoe', name: 'mirai-core-utils', version: '2.13.0-RC2'

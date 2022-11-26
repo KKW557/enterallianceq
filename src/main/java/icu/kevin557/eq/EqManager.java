@@ -3,6 +3,7 @@ package icu.kevin557.eq;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
+import icu.kevin557.eq.bot.clashroyale.ClashroyaleBot;
 import icu.kevin557.eq.bot.manager.ManagerBot;
 import icu.kevin557.eq.bot.minecraft.MinecraftBot;
 import icu.kevin557.eq.utils.Logger;
@@ -18,8 +19,8 @@ import java.util.List;
  */
 public class EqManager {
 
-    private static final EnteralianceQ[] REGISTER_BOTS = {new ManagerBot(), new MinecraftBot()};
-    public static final List<EnteralianceQ> BOTS = new ArrayList<>();
+    private static final EnterallianceQ[] REGISTER_BOTS = {new ManagerBot(), new MinecraftBot(), new ClashroyaleBot()};
+    public static final List<EnterallianceQ> BOTS = new ArrayList<>();
 
     public static void loadBots() {
         File file = new File("bots.json");
@@ -31,7 +32,7 @@ public class EqManager {
                 String name = jsonObject.getString("name");
                 long qq = jsonObject.getLong("qq");
                 byte[] password = jsonObject.getJSONArray("password").to(byte[].class);
-                for (EnteralianceQ bot : REGISTER_BOTS) {
+                for (EnterallianceQ bot : REGISTER_BOTS) {
                     if (bot.getName().equals(name)) {
                         try {
                             BOTS.add(bot.newInstance(qq, password));
@@ -50,25 +51,25 @@ public class EqManager {
     }
 
     public static void loadBotConfigs() {
-        for (EnteralianceQ bot : BOTS) {
+        for (EnterallianceQ bot : BOTS) {
             bot.loadConfigs();
         }
     }
 
     public static void registerBotCommands() {
-        for (EnteralianceQ bot : BOTS) {
+        for (EnterallianceQ bot : BOTS) {
             bot.registerCommands();
         }
     }
 
     public static void loginBots() {
-        for (EnteralianceQ bot : BOTS) {
+        for (EnterallianceQ bot : BOTS) {
             bot.login();
         }
     }
 
     public static void subscribeBotEvents() {
-        for (EnteralianceQ bot : BOTS) {
+        for (EnterallianceQ bot : BOTS) {
             bot.subscribeEvents();
         }
     }
